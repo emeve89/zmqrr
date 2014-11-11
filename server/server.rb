@@ -24,7 +24,7 @@ def fac(n)
   (1..n).reduce(:*) || 1
 end
 
-puts "Starting AckFibFac Server..."
+puts "Starting Server..."
 
 context = ZMQ::Context.new
 socket  = context.socket(ZMQ::REP)
@@ -40,10 +40,10 @@ loop do
   coll.insert(JSON.parse(request))
 
   puts "Received request. Data: #{request.inspect}"
-  req_json  = JSON.parse(request)
-  req_fn    = req_json['fn']
+  req_json     = JSON.parse(request)
+  req_function = req_json['function']
 
-  case req_fn
+  case req_function
   when 'fib'
     socket.send_string(fib(req_json['n'].to_i).to_s)
   when 'fac'

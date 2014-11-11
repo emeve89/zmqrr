@@ -3,13 +3,13 @@ require 'json'
 
 context = ZMQ::Context.new
 
-puts 'Connecting to the AckFibFac Server...'
+puts 'Connecting to the Server...'
 requester = context.socket(ZMQ::REQ)
 requester.connect('tcp://localhost:5555')
 
 loop do
   n = rand(20) + 1
-  fib_request = { fn: 'fib', n: n }
+  fib_request = { function: 'fib', n: n }
 
   puts "Computing Fibonacci(#{n})"
   requester.send_string fib_request.to_json
