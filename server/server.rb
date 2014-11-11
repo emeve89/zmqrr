@@ -31,7 +31,7 @@ socket  = context.socket(ZMQ::REP)
 socket.bind("tcp://*:5555")
 
 db    = Mongo::Connection.new.db('zmq-db')
-coll  = db.collection('test')
+coll  = db.collection('requests')
 
 loop do
   request = ''
